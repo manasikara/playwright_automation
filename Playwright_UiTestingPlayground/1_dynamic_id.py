@@ -10,5 +10,7 @@ with sync_playwright() as p:
     page.click('text=Button with Dynamic ID')
     browser.close()
     print('Done')
+    
+
 
     
