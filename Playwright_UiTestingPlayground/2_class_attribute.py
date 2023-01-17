@@ -9,4 +9,4 @@ with sync_playwright() as p:
     page.click('//*[@id="overview"]/div/div[1]/div[2]/h3/a')
     
     
-    print("congrats, u're amazing automation tester!")
+    print("congrats, u're an amazing automation tester!")
