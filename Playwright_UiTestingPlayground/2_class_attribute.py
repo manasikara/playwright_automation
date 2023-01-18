@@ -9,3 +9,4 @@ def test_class_attribute(page)
     
     
     
+    
