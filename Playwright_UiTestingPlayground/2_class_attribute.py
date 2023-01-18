@@ -1,13 +1,12 @@
+#learning automation using a pytest
 #http://uitestingplayground.com/classattr
+#https://playwright.dev/python/docs/test-runners
 
-from playwright.sync_api import sync_playwright
-
-with sync_playwright() as p:
-    browser = p.chromium.launch(headless=False)
-    page = browser.new_page()
+def test_class_attribute(page)
     page.goto("http://uitestingplayground.com/")
     page.click('//*[@id="overview"]/div/div[1]/div[2]/h3/a')
-    page.click(":button('.btn class1 btn-success btn-test')")
-    #? ? ? ? 
-
-    print("congrats, u're an amazing automation tester!")
+    # ? ? ?
+    page.click("//button[contains(concat(' ', normalize-space(@class), ' '), ' btn-primary ')]")
+    
+    
+    
