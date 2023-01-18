@@ -8,5 +8,3 @@ def test_class_attribute(page)
     page.click(":button('.btn class1 btn-success btn-test')")
     
     
-    
-    
