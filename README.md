@@ -1,3 +1,5 @@
 # playwright_automation
 Learning automation in Playwright via http://uitestingplayground.com/
-Some cases are tested using pytest
+----------
+Testing shopping process at --> https://www.saucedemo.com/
+---------------
