@@ -1,35 +1,36 @@
 #https://www.saucedemo.com/
+#test slowed down by 800ms to see the certain steps as they occur 
 
 from playwright.sync_api import Playwright, sync_playwright, expect
 
 with sync_playwright() as p:
-    browser = p.chromium.launch(headless=False)
+    browser = p.chromium.launch(headless=False,slow_mo=800)
     context = browser.new_context()
     page = context.new_page()
     page.goto("https://www.saucedemo.com/")
-    
+
     #logging process
     page.locator("[data-test=\"username\"]").click()
     page.locator("[data-test=\"username\"]").fill("standard_user")
     page.locator("[data-test=\"username\"]").press("Tab")
     page.locator("[data-test=\"password\"]").fill("secret_sauce")
     page.locator("[data-test=\"login-button\"]").click()
-    
+
     #browsing items - lowest price first - adding to a cart
     page.get_by_text("Name (A to Z)Name (A to Z)Name (Z to A)Price (low to high)Price (high to low)").click()
     page.locator("[data-test=\"add-to-cart-sauce-labs-onesie\"]").click()
     page.locator("#shopping_cart_container a").click()
-    
+
     #removing added item
     page.locator("[data-test=\"remove-sauce-labs-onesie\"]").click()
     page.locator("[data-test=\"continue-shopping\"]").click()
-    
+
     #adding another item - highest price first
     page.get_by_text("Name (A to Z)Name (A to Z)Name (Z to A)Price (low to high)Price (high to low)").click()
     page.locator("[data-test=\"product_sort_container\"]").select_option("hilo")
     page.locator("[data-test=\"add-to-cart-sauce-labs-fleece-jacket\"]").click()
     page.locator("#shopping_cart_container a").click()
-    
+
     #checkout process
     page.locator("[data-test=\"checkout\"]").click()
     page.locator("[data-test=\"firstName\"]").click()
@@ -47,4 +48,4 @@ with sync_playwright() as p:
     # ---------------------
     context.close()
     browser.close()
-    print('Thank you for shopping with us')
+    print('Thank you for shopping with us!')
