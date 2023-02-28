@@ -42,6 +42,7 @@ with sync_playwright() as p:
     page.locator("[data-test=\"continue\"]").click()
     page.locator("[data-test=\"finish\"]").click()
     page.locator("[data-test=\"back-to-products\"]").click()
+    #logging out
     page.get_by_role("button", name="Open Menu").click()
     page.get_by_role("link", name="Logout").click()
 
