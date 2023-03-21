@@ -7,7 +7,7 @@ with sync_playwright() as p:
     page = browser.new_page()
     page.goto('http://uitestingplayground.com/')
     page.click('text=Scrollbars')
-    page.locator("#hidingButton").click()
+    page.click('text=Hiding Button')
     page.close()
     print('ok')
     
