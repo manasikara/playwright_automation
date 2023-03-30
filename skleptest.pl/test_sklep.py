@@ -1,13 +1,13 @@
 from playwright.sync_api import sync_playwright
 import time
-
-# A library which allows to generate random straings. In this case, used to fill-in the comment section
+# 'random' A library which allows to generate random straings. In this case, used to fill-in the comment section
 import random
 import string
 
 def run(playwright):
     browser = playwright.chromium.launch(headless=False)
     context = browser.new_context()
+
     # Open new page
     page = context.new_page()
     # Go to https://skleptest.pl/
@@ -47,7 +47,7 @@ def run(playwright):
     page.click('a.dropdown-toggle')
     # Click "All"
     # page.select_options('text=All') #  <--- STUCK AT DROPDOWN LIST, TBC....
-   
+    
     # Click "About Us"
     page.click('text=about us')
     # Filling-in a "Contact" form
@@ -116,22 +116,24 @@ def run(playwright):
     # assert page.url == "https://skleptest.pl/long-legs-no-longer-myth-check/"
     # Go to https://skleptest.pl/tag/all/
     page.goto("https://skleptest.pl/tag/all/")
+    time.sleep(1)
     # Click text=Jackets For The Soul. What Color Is Yours?
     page.click("text=Jackets For The Soul. What Color Is Yours?")
     # assert page.url == "https://skleptest.pl/jackets-soul-color/"
+    # Testing the 'Recent Comments' div
     # Go to https://skleptest.pl/tag/all/
     page.goto("https://skleptest.pl/tag/all/")
     # Click #recentcomments >> text=Latest Trends For Autumn Are Here!
-    page.click("#recentcomments >> text=Latest Trends For Autumn Are Here!")
+    page.click("//body/div[@id='page']/div[@class='site-content']/div[@class='container']/div[@class='row']/aside[@id='secondary']/div[@id='recent-comments-2']/ul[@id='recentcomments']/li[1]/a[1]")
     # assert page.url == "https://skleptest.pl/latest-trends-autumn/#comment-14"
     # Click textarea[name="comment"]
     page.click("textarea[name=\"comment\"]")
     # Fill textarea[name="comment"]
-    page.fill("textarea[name=\"comment\"]", ''.join(random.choices(string.ascii_lowercase, k=5))) 
+    page.fill("textarea[name=\"comment\"]", ''.join(random.choices(string.ascii_lowercase, k=50))) 
     # Press Tab
     page.press("textarea[name=\"comment\"]", "Tab")
     # Fill input[name="author"]
-    page.fill("input[name=\"author\"]", "me@googlemail.com")
+    page.fill("input[name=\"author\"]", ''.join(random.choices(string.ascii_lowercase, k=7))) 
     # Press Tab
     page.press("input[name=\"author\"]", "Tab")
     # Fill input[name="email"]
@@ -143,23 +145,9 @@ def run(playwright):
     # Click text=Post Comment
     page.click("text=Post Comment")
     # assert page.url == "https://skleptest.pl/latest-trends-autumn/#comment-6976"
-    # Click [aria-label="Reply to me@googlemail.com"]
-    page.click("[aria-label=\"Reply to me@googlemail.com\"]")
-    # Click textarea[name="comment"] # <-- COMMENTING limited in time, hence the break in testing (clicking 'go back' helps)!!!
-    page.click("textarea[name=\"comment\"]")  
-    # Fill textarea[name="comment"]
-    page.fill("textarea[name=\"comment\"]", "somethig") 
-    # Click text=Post Comment
-    page.click("text=Post Comment")
-    # assert page.url == "https://skleptest.pl/latest-trends-autumn/#comment-6977"
-    # Click #recentcomments >> text=Jackets For The Soul. What Color Is Yours?
-    page.click("#recentcomments >> text=Jackets For The Soul. What Color Is Yours?")
-    # assert page.url == "https://skleptest.pl/jackets-soul-color/#comment-11"
-    # Go to https://skleptest.pl/latest-trends-autumn/#comment-6977
-    page.goto("https://skleptest.pl/latest-trends-autumn/#comment-6977")
-    # Click text=franek on Jackets For The Soul. What Color Is Yours? >> a
-    page.click("text=franek on Jackets For The Soul. What Color Is Yours? >> a")
-    # assert page.url == "https://skleptest.pl/jackets-soul-color/#comment-8"
+    
+    
+    
     # Click text=September 2017
     page.click("text=September 2017")
     # assert page.url == "https://skleptest.pl/2017/09/"
@@ -177,25 +165,13 @@ def run(playwright):
     # assert page.url == "https://skleptest.pl/wp-login.php"
     # Go to https://skleptest.pl/category/fashion/
     page.goto("https://skleptest.pl/category/fashion/")
-    # Click text=Entries RSS
-    page.click("text=Entries RSS")
-    # assert page.url == "https://skleptest.pl/feed/"
-    # Go to https://skleptest.pl/category/fashion/
-    page.goto("https://skleptest.pl/category/fashion/")
-    # Click text=Comments RSS
-    page.click("text=Comments RSS")
-    # assert page.url == "https://skleptest.pl/comments/feed/"
-    # Go to https://skleptest.pl/category/fashion/
-    page.goto("https://skleptest.pl/category/fashion/")
+   
     # Click text=WordPress.org
     page.click("text=WordPress.org")
     # assert page.url == "https://wordpress.org/"
     # Go to https://skleptest.pl/category/fashion/
     page.goto("https://skleptest.pl/category/fashion/")
-    # Click #next
-    page.click("#next")
-    # Click text=Blog
-    page.click("text=Blog")
+    
     # assert page.url == "https://skleptest.pl/tag/all/"
     # Click [placeholder="Search …"]
     page.click("[placeholder=\"Search …\"]")
@@ -276,6 +252,7 @@ def run(playwright):
     page.click("#tyche_products-7 >> :nth-match(:text(\"Add to cart\"), 3)")
     # Click #tyche_products-7 >> :nth-match(:text("Add to cart"), 4)
     page.click("#tyche_products-7 >> :nth-match(:text(\"Add to cart\"), 4)")
+    time.sleep(2)
     # Click text=My Cart - zł 0
     page.click("text=My Cart - zł 40") # a BUG!!! <-- The cart shows a wrong ammount
     # assert page.url == "https://skleptest.pl/cart/"
@@ -337,9 +314,10 @@ def run(playwright):
     # with page.expect_navigation(url="https://skleptest.pl/checkout/order-received/5082/?key=wc_order_642568013da28"):
     with page.expect_navigation():
         page.click("text=Place order")
-    time.sleep(5)    
+    time.sleep(3)    
     # Saving the order details
     page.screenshot(path="screenshot.png")
+    
     
     print('Thanks for shopping with us!')
     context.close()
