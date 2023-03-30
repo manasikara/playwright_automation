@@ -71,7 +71,7 @@ def run(playwright):
     page.click("text=Send")
     
     # Click "Blog"
-     # Click text=Blog
+    # Click text=Blog
     page.click("text=Blog")
     # assert page.url == "https://skleptest.pl/tag/all/"
     # Click [placeholder="Search …"]
