@@ -32,7 +32,7 @@ def run(playwright):
     page.click("text=My Cart - zł 0")
     # assert page.url == "https://skleptest.pl/cart/"
     # Click text=Return to shop
-    page.click("text=Return to shop") # Images are not being loaded properly!!!
+    page.click("text=Return to shop") # a BUG <-- Images are not being loaded properly!!!
     # assert page.url == "https://skleptest.pl/shop/"
     # Click text=Generic Shop
     page.click(".site-title")
@@ -46,7 +46,7 @@ def run(playwright):
     # Click "Categories"
     page.click('a.dropdown-toggle')
     # Click "All"
-    # page.select_options('text=All') # <--- STUCK AT DROPDOWN LIST, TBC....
+    # page.select_options('text=All') #  <--- STUCK AT DROPDOWN LIST, TBC....
    
     # Click "About Us"
     page.click('text=about us')
@@ -127,7 +127,7 @@ def run(playwright):
     # Click textarea[name="comment"]
     page.click("textarea[name=\"comment\"]")
     # Fill textarea[name="comment"]
-    page.fill("textarea[name=\"comment\"]", ''.join(random.choices(string.ascii_lowercase, k=5))) # <-- change the comment in each testing attemtp
+    page.fill("textarea[name=\"comment\"]", ''.join(random.choices(string.ascii_lowercase, k=5))) 
     # Press Tab
     page.press("textarea[name=\"comment\"]", "Tab")
     # Fill input[name="author"]
@@ -145,10 +145,10 @@ def run(playwright):
     # assert page.url == "https://skleptest.pl/latest-trends-autumn/#comment-6976"
     # Click [aria-label="Reply to me@googlemail.com"]
     page.click("[aria-label=\"Reply to me@googlemail.com\"]")
-    # Click textarea[name="comment"]
-    page.click("textarea[name=\"comment\"]")
+    # Click textarea[name="comment"] # <-- COMMENTING limited in time, hence the break in testing (clicking 'go back' helps)!!!
+    page.click("textarea[name=\"comment\"]")  
     # Fill textarea[name="comment"]
-    page.fill("textarea[name=\"comment\"]", "somethig")  # <-- change the comment in each testing attemtp
+    page.fill("textarea[name=\"comment\"]", "somethig") 
     # Click text=Post Comment
     page.click("text=Post Comment")
     # assert page.url == "https://skleptest.pl/latest-trends-autumn/#comment-6977"
@@ -208,10 +208,140 @@ def run(playwright):
     page.click("text=Generic Shop")
     # assert page.url == "https://skleptest.pl/"
     
-    # 'div class item' to be tested next time  ------------
+    # Testing div class 'item'
+    page.click("//div[@class='owl-item active']//a[normalize-space()='Shop Now']") #  <-- Website crashes at this point
+    # Go to https://skleptest.pl/
+    page.goto("https://skleptest.pl/")
+    # Click :nth-match(:text("Learn More"), 3)
+    page.click(":nth-match(:text(\"Learn More\"), 3)")
+    # Go to https://skleptest.pl/
+    page.goto("https://skleptest.pl/")
     
+    # Testing div class 'site-content'
+    # Adding all the available items to the cart
     
-    print('Done!')
+    # Click text=Add to cart
+    page.click("text=Add to cart") # a BUG!!! <-- image missing!!!
+    # Click #tyche_products-1 >> :nth-match(:text("Add to cart"), 2)
+    page.click("#tyche_products-1 >> :nth-match(:text(\"Add to cart\"), 2)")
+    # Click #tyche_products-1 >> :nth-match(:text("Add to cart"), 3)
+    page.click("#tyche_products-1 >> :nth-match(:text(\"Add to cart\"), 3)")
+    # Click text=BUY NOW
+    page.click("text=BUY NOW")
+    # assert page.url == "https://skleptest.pl/skleptest.pl/?s="
+    # Go to https://skleptest.pl/
+    page.goto("https://skleptest.pl/")
+    # Click #tyche_products-2 >> text=BUY NOW
+    page.click("#tyche_products-2 >> text=BUY NOW")
+    # assert page.url == "https://skleptest.pl/skleptest.pl/?s="
+    # Go to https://skleptest.pl/
+    page.goto("https://skleptest.pl/")
+    # Click #tyche_products-2 >> text=Add to cart
+    page.click("#tyche_products-2 >> text=Add to cart")
+    # Click text=Manago Shirt Rated 5.00 out of 5 25 zł Add to cart >> :nth-match(a, 2)
+    page.click("text=Manago Shirt Rated 5.00 out of 5 25 zł Add to cart >> :nth-match(a, 2)")
+    # Click text=Blue Sweater Rated 4.00 out of 5 25 zł 15 zł Add to cart >> :nth-match(a, 2)
+    page.click("text=Blue Sweater Rated 4.00 out of 5 25 zł 15 zł Add to cart >> :nth-match(a, 2)")
+    # Click #tyche_products-3 >> text=Add to cart
+    page.click("#tyche_products-3 >> text=Add to cart")
+    # Click #tyche_products-4 >> text=Add to cart
+    page.click("#tyche_products-4 >> text=Add to cart")
+    # Click #tyche_products-5 >> text=Add to cart
+    page.click("#tyche_products-5 >> text=Add to cart")
+    # Click #tyche_products-3 >> :nth-match(:text("Add to cart"), 2)
+    page.click("#tyche_products-3 >> :nth-match(:text(\"Add to cart\"), 2)")
+    # Click #tyche_products-4 >> :nth-match(:text("Add to cart"), 2)
+    page.click("#tyche_products-4 >> :nth-match(:text(\"Add to cart\"), 2)")
+    # Click #tyche_products-5 >> :nth-match(:text("Add to cart"), 2)
+    page.click("#tyche_products-5 >> :nth-match(:text(\"Add to cart\"), 2)")
+    # Click #tyche_products-3 >> :nth-match(:text("Add to cart"), 3)
+    page.click("#tyche_products-3 >> :nth-match(:text(\"Add to cart\"), 3)")
+    # Click #tyche_products-4 >> :nth-match(:text("Add to cart"), 3)
+    page.click("#tyche_products-4 >> :nth-match(:text(\"Add to cart\"), 3)")
+    # Click #tyche_products-5 >> :nth-match(:text("Add to cart"), 3)
+    page.click("#tyche_products-5 >> :nth-match(:text(\"Add to cart\"), 3)")
+    # Click #tyche_products-6 >> text=Add to cart
+    page.click("#tyche_products-6 >> text=Add to cart")
+    # Click #tyche_products-6 >> :nth-match(:text("Add to cart"), 2)
+    page.click("#tyche_products-6 >> :nth-match(:text(\"Add to cart\"), 2)")
+    # Click #tyche_products-6 >> :nth-match(:text("Add to cart"), 3)
+    page.click("#tyche_products-6 >> :nth-match(:text(\"Add to cart\"), 3)")
+    # Click #tyche_products-6 >> :nth-match(:text("Add to cart"), 4)
+    page.click("#tyche_products-6 >> :nth-match(:text(\"Add to cart\"), 4)")
+    # Click #tyche_products-7 >> text=Add to cart
+    page.click("#tyche_products-7 >> text=Add to cart")
+    # Click #tyche_products-7 >> :nth-match(:text("Add to cart"), 2)
+    page.click("#tyche_products-7 >> :nth-match(:text(\"Add to cart\"), 2)")
+    # Click #tyche_products-7 >> :nth-match(:text("Add to cart"), 3)
+    page.click("#tyche_products-7 >> :nth-match(:text(\"Add to cart\"), 3)")
+    # Click #tyche_products-7 >> :nth-match(:text("Add to cart"), 4)
+    page.click("#tyche_products-7 >> :nth-match(:text(\"Add to cart\"), 4)")
+    # Click text=My Cart - zł 0
+    page.click("text=My Cart - zł 40") # a BUG!!! <-- The cart shows a wrong ammount
+    # assert page.url == "https://skleptest.pl/cart/"
+    
+    # Removing items singly from the cart list
+    # Click text=×
+    page.click("text=×") # a BUG!!! <-- can't remove the items 
+    
+    #Applying the coupon code
+    # Click [placeholder="Coupon code"]
+    page.click("[placeholder=\"Coupon code\"]")
+    # Fill [placeholder="Coupon code"]
+    page.fill("[placeholder=\"Coupon code\"]", "asdf1234")
+    # Click text=Apply coupon
+    page.click("text=Apply coupon") # a BUG!!! <-- can't appyly a coupon code
+    # Click text=Proceed to checkout
+    page.click("text=Proceed to checkout")
+    # Click input[name="billing_first_name"]
+    page.click("input[name=\"billing_first_name\"]")
+    # Fill input[name="billing_first_name"]
+    page.fill("input[name=\"billing_first_name\"]", "some")
+    # Press Tab
+    page.press("input[name=\"billing_first_name\"]", "Tab")
+    # Fill input[name="billing_last_name"]
+    page.fill("input[name=\"billing_last_name\"]", "name")
+    # Press Tab
+    page.press("input[name=\"billing_last_name\"]", "Tab")
+    # Fill input[name="billing_company"]
+    page.fill("input[name=\"billing_company\"]", "xxx")
+    # Click span[role="textbox"]:has-text("Poland")
+    page.click("span[role=\"textbox\"]:has-text(\"Poland\")")
+    # Click li[role="option"]:has-text("United Kingdom (UK)")
+    page.click("li[role=\"option\"]:has-text(\"United Kingdom (UK)\")")
+    # 0× click
+    page.click("text=County")
+    # Click [placeholder="House number and street name"]
+    page.click("[placeholder=\"House number and street name\"]")
+    # Fill [placeholder="House number and street name"]
+    page.fill("[placeholder=\"House number and street name\"]", "81 Hindhead Road")
+    # Click input[name="billing_city"]
+    page.click("input[name=\"billing_city\"]")
+    # Fill input[name="billing_city"]
+    page.fill("input[name=\"billing_city\"]", "Earl Soham")
+    # Click input[name="billing_postcode"]
+    page.click("input[name=\"billing_postcode\"]")
+    # Fill input[name="billing_postcode"]
+    page.fill("input[name=\"billing_postcode\"]", "IP13 1JX")
+    # 0× click
+    page.click("text=Home /Shop/Checkout Checkout Returning customer? Click here to login If you have")
+    # Click input[name="billing_phone"]
+    page.click("input[name=\"billing_phone\"]", modifiers=["Control"])
+    # Fill input[name="billing_phone"]
+    page.fill("input[name=\"billing_phone\"]", "070 2135 8078")
+    # Click input[name="billing_email"]
+    page.click("input[name=\"billing_email\"]")
+    # Fill input[name="billing_email"]
+    page.fill("input[name=\"billing_email\"]", "me@googlemail.com")
+    # Click text=Place order
+    # with page.expect_navigation(url="https://skleptest.pl/checkout/order-received/5082/?key=wc_order_642568013da28"):
+    with page.expect_navigation():
+        page.click("text=Place order")
+    time.sleep(5)    
+    # Saving the order details
+    page.screenshot(path="screenshot.png")
+    
+    print('Thanks for shopping with us!')
     context.close()
     browser.close()
 with sync_playwright() as playwright:
