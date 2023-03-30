@@ -1,6 +1,10 @@
 from playwright.sync_api import sync_playwright
 import time
 
+# A library which allows to generate random straings. In this case, used to fill-in the comment section
+import random
+import string
+
 def run(playwright):
     browser = playwright.chromium.launch(headless=False)
     context = browser.new_context()
@@ -58,11 +62,11 @@ def run(playwright):
     # Press Tab
     page.press("input[name=\"your-email\"]", "Tab")
     # Fill input[name="your-subject"]
-    page.fill("input[name=\"your-subject\"]", "some subject")
+    page.fill("input[name=\"your-subject\"]", ''.join(random.choices(string.ascii_lowercase, k=5)))
     # Click textarea[name="your-message"]
     page.click("textarea[name=\"your-message\"]")
     # Fill textarea[name="your-message"]
-    page.fill("textarea[name=\"your-message\"]", "some message")
+    page.fill("textarea[name=\"your-message\"]", ''.join(random.choices(string.ascii_lowercase, k=5)))
     # Click text=Send
     page.click("text=Send")
     
@@ -123,7 +127,7 @@ def run(playwright):
     # Click textarea[name="comment"]
     page.click("textarea[name=\"comment\"]")
     # Fill textarea[name="comment"]
-    page.fill("textarea[name=\"comment\"]", "xxx") # <-- change the comment in each testing attemtp
+    page.fill("textarea[name=\"comment\"]", ''.join(random.choices(string.ascii_lowercase, k=5))) # <-- change the comment in each testing attemtp
     # Press Tab
     page.press("textarea[name=\"comment\"]", "Tab")
     # Fill input[name="author"]
