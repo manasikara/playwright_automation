@@ -45,8 +45,78 @@ def run(playwright):
     page.click('#menu-item-128')
     # Click "Categories"
     page.click('a.dropdown-toggle')
+    
+    # Hover over 'catergries' <-- a misspelling BUG here!!! Should be a 'categories' instead.
+    header_menu = page.locator("a.dropdown-toggle", has_text="catergries")
+    header_menu.hover()
+    
     # Click "All"
-    # page.select_options('text=All') #  <--- STUCK AT DROPDOWN LIST, TBC....
+    page.click('text=all')
+    # Click text=Generic Shop
+    page.click("text=Generic Shop")
+    # Hover over 'catergries'
+    header_menu = page.locator("a.dropdown-toggle", has_text="catergries")
+    header_menu.hover()
+    
+    page.click('text=shirts')
+    # Click text=Generic Shop
+    page.click("text=Generic Shop")
+    # Hover over 'catergries'
+    header_menu = page.locator("a.dropdown-toggle", has_text="catergries")
+    header_menu.hover()
+    
+    page.click('text=featured')
+    # Click text=Generic Shop
+    page.click("text=Generic Shop")
+    # Hover over 'catergries'
+    header_menu = page.locator("a.dropdown-toggle", has_text="catergries")
+    header_menu.hover()
+    
+    page.click('text=trends')
+    # Click text=Generic Shop
+    page.click("text=Generic Shop")
+    # Hover over 'catergries'
+    header_menu = page.locator("a.dropdown-toggle", has_text="catergries")
+    header_menu.hover()
+    
+    page.click('text=scarfs')
+    # Click text=Generic Shop
+    page.click("text=Generic Shop")
+    # Hover over 'catergries'
+    header_menu = page.locator("a.dropdown-toggle", has_text="catergries")
+    header_menu.hover()
+    
+    page.click('text=shoes')
+    # Click text=Generic Shop
+    page.click("text=Generic Shop")
+    # Hover over 'catergries'
+    header_menu = page.locator("a.dropdown-toggle", has_text="catergries")
+    header_menu.hover()
+    
+    page.click('text=tops')
+    # Click text=Generic Shop
+    page.click("text=Generic Shop")
+    # Hover over 'catergries'
+    header_menu = page.locator("a.dropdown-toggle", has_text="catergries")
+    header_menu.hover()
+    
+    page.click('text=blouse')
+    # Click text=Generic Shop
+    page.click("text=Generic Shop")
+    # Hover over 'catergries'
+    header_menu = page.locator("a.dropdown-toggle", has_text="catergries")
+    header_menu.hover()
+    
+    page.click('text=jeans')
+    # Click text=Generic Shop
+    page.click("text=Generic Shop")   
+    # Hover over 'catergries'
+    header_menu = page.locator("a.dropdown-toggle", has_text="catergries")
+    header_menu.hover()
+    
+    page.click('text=dresses')
+    # Click text=Generic Shop
+    page.click("text=Generic Shop")
     
     # Click "About Us"
     page.click('text=about us')
@@ -120,7 +190,9 @@ def run(playwright):
     # Click text=Jackets For The Soul. What Color Is Yours?
     page.click("text=Jackets For The Soul. What Color Is Yours?")
     # assert page.url == "https://skleptest.pl/jackets-soul-color/"
+    
     # Testing the 'Recent Comments' div
+    
     # Go to https://skleptest.pl/tag/all/
     page.goto("https://skleptest.pl/tag/all/")
     # Click #recentcomments >> text=Latest Trends For Autumn Are Here!
@@ -146,8 +218,6 @@ def run(playwright):
     page.click("text=Post Comment")
     # assert page.url == "https://skleptest.pl/latest-trends-autumn/#comment-6976"
     
-    
-    
     # Click text=September 2017
     page.click("text=September 2017")
     # assert page.url == "https://skleptest.pl/2017/09/"
@@ -171,7 +241,6 @@ def run(playwright):
     # assert page.url == "https://wordpress.org/"
     # Go to https://skleptest.pl/category/fashion/
     page.goto("https://skleptest.pl/category/fashion/")
-    
     # assert page.url == "https://skleptest.pl/tag/all/"
     # Click [placeholder="Search …"]
     page.click("[placeholder=\"Search …\"]")
@@ -185,6 +254,7 @@ def run(playwright):
     # assert page.url == "https://skleptest.pl/"
     
     # Testing div class 'item'
+    
     page.click("//div[@class='owl-item active']//a[normalize-space()='Shop Now']") #  <-- Website crashes at this point
     # Go to https://skleptest.pl/
     page.goto("https://skleptest.pl/")
@@ -258,6 +328,7 @@ def run(playwright):
     # assert page.url == "https://skleptest.pl/cart/"
     
     # Removing items singly from the cart list
+    
     # Click text=×
     page.click("text=×") # a BUG!!! <-- can't remove the items 
     
@@ -310,11 +381,13 @@ def run(playwright):
     page.click("input[name=\"billing_email\"]")
     # Fill input[name="billing_email"]
     page.fill("input[name=\"billing_email\"]", "me@googlemail.com")
+    time.sleep(2)
     # Click text=Place order
     # with page.expect_navigation(url="https://skleptest.pl/checkout/order-received/5082/?key=wc_order_642568013da28"):
     with page.expect_navigation():
         page.click("text=Place order")
     time.sleep(3)    
+    
     # Saving the order details
     page.screenshot(path="screenshot.png")
     
