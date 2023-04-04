@@ -7,3 +7,5 @@ Testing  --> https://automationteststore.com/
 ----------
 Full website test cover --> https://skleptest.pl/
 ----------
+Testing --> https://demoqa.com
+--------------------
