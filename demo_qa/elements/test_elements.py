@@ -4,6 +4,7 @@ from playwright.sync_api import sync_playwright, expect
 import time
 import re
 
+
 def test_elements():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=False, slow_mo=200)
@@ -13,7 +14,7 @@ def test_elements():
         # Text box testing
         page.click("(//*[name()='svg'][@stroke='currentColor'])[1]")
         expect(page).to_have_url('https://demoqa.com/elements')
-        '''
+        
         page.click('span.text')
         page.locator('#userName').fill('Some Name')
         page.locator('#userEmail').fill('someemail@me.com')
@@ -38,7 +39,7 @@ def test_elements():
         # Radio Button
         page.click("label[for='yesRadio']")
         page.click("label[for='impressiveRadio']")
-        '''
+        
         # Web Tables
         page.click('text=Web Tables')
         page.click("text=First Name")
@@ -64,14 +65,42 @@ def test_elements():
         page.get_by_role("button", name="Submit").click()
         page.click("(//*[name()='path'])[55]")
         page.click("(//*[name()='path'])[57]")
-        page.locator(".select-wrap -pageSizeOptions").click()
+        page.click(".-totalPages")
+        page.get_by_role("spinbutton", name="jump to page").press("Tab")
+        page.get_by_role("combobox", name="rows per page").press("Enter")
+        page.get_by_role("combobox", name="rows per page").select_option("5")
 
-
-        print('Done! ᕙ(▀̿̿Ĺ̯̿̿▀̿ ̿) ᕗ')
-        # ---------------------
+        # Buttons
+        page.click("text=Buttons")
+        page.get_by_text("Double Click Me").dblclick()
+        page.get_by_text("Right Click Me").click(button="right")
+        page.get_by_title("Click Me")
+        
+        # Links
+        page.click("(//li[@id='item-5'])[1]")
+        with page.expect_popup() as page1_info:
+            page.get_by_role("link", name="Home", exact=True).click()
+            page1 = page1_info.value
+            page1.close()
+        with page.expect_popup() as page2_info:
+            page.click("#dynamicLink")
+            page2 = page2_info.value
+            page2.close()
+            
+        page.click("#created")
+        page.click("#no-content")
+        page.click("#moved")
+        page.click("#bad-request")
+        page.click("#unauthorized")
+        page.click("#forbidden")
+        page.click("#invalid-url")                
+        
+        
         browser.close()
+        print('Done! ᕙ(▀̿̿Ĺ̯̿̿▀̿ ̿) ᕗ')
+        
+        # to be continued ! ! !.........
 
 
-# to be continued............!!!
 
 
