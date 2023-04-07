@@ -9,11 +9,9 @@ def test_elements():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=False, slow_mo=200)
         page = browser.new_page()
-        page.goto('https://demoqa.com')
+        page.goto('https://demoqa.com/elements')
 
         # Text box testing
-        page.click("(//*[name()='svg'][@stroke='currentColor'])[1]")
-        expect(page).to_have_url('https://demoqa.com/elements')
         
         page.click('span.text')
         page.locator('#userName').fill('Some Name')
@@ -37,10 +35,12 @@ def test_elements():
         page.click('text=radio button')
 
         # Radio Button
+        
         page.click("label[for='yesRadio']")
         page.click("label[for='impressiveRadio']")
         
         # Web Tables
+        
         page.click('text=Web Tables')
         page.click("text=First Name")
         page.click("text=Last Name")
@@ -71,12 +71,14 @@ def test_elements():
         page.get_by_role("combobox", name="rows per page").select_option("5")
 
         # Buttons
+        
         page.click("text=Buttons")
         page.get_by_text("Double Click Me").dblclick()
         page.get_by_text("Right Click Me").click(button="right")
         page.get_by_title("Click Me")
         
         # Links
+        
         page.click("(//li[@id='item-5'])[1]")
         with page.expect_popup() as page1_info:
             page.get_by_role("link", name="Home", exact=True).click()
@@ -95,11 +97,38 @@ def test_elements():
         page.click("#forbidden")
         page.click("#invalid-url")                
         
+        # Broken Links/Images
+        
+        page.click("text=Broken Links - Images")     
+        page.get_by_role("img").nth(2).click()
+        page.get_by_role("img").nth(3).click()
+        page.get_by_role("link", name="Click Here for Valid Link").click()
+        page.goto("https://demoqa.com/broken")
+        page.get_by_role("link", name="Click Here for Broken Link").click()
+        page.goto("https://demoqa.com/broken")
+        
+        # Upload and Download
+        
+        page.click("text=Upload and Download")
+        page.click("#downloadButton")
+        with page.expect_file_chooser() as fc_info:
+            page.click("#uploadFile")
+        file_chooser = fc_info.value
+        file_chooser.set_files("sampleFile.jpeg")
+        
+        # Dynamic Propeties
+        
+        page.click("text=Dynamic Properties")
+        page.click("text=Will enable 5 seconds")
+        page.click("#colorChange")
+        page.click("#visibleAfter")
+        
+        
         
         browser.close()
         print('Done! ᕙ(▀̿̿Ĺ̯̿̿▀̿ ̿) ᕗ')
         
-        # to be continued ! ! !.........
+        # to be continued ! ! !......... "forms next in queue"
 
 
 
