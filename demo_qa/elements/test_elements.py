@@ -10,27 +10,25 @@ def test_elements():
         browser = p.chromium.launch(headless=False, slow_mo=200)
         page = browser.new_page()
         page.goto('https://demoqa.com/elements')
-
+        
         # Text box testing
         
         page.click('span.text')
         page.locator('#userName').fill('Some Name')
         page.locator('#userEmail').fill('someemail@me.com')
         page.locator('#currentAddress').fill('Proin vitae ipsum tincidunt, lacinia nisi pellentesque,   ultricies neque.')
-        page.locator('#permanentAddress').fill(
-            'Proin vitae ipsum tincidunt, lacinia nisi pellentesque, ultricies neque.')
+        page.locator('#permanentAddress').fill('Proin vitae ipsum tincidunt, lacinia nisi pellentesque, ultricies neque.')
+            
         page.click('#submit')
 
         # Checkbox
 
         page.click("text=check box")
         page.click("(//*[name()='svg'][@class='rct-icon rct-icon-expand-close'])[1]")
-        page.get_by_role("listitem").filter(has_text=re.compile(r"^Desktop$")).get_by_role("button",
-                                                                                           name="Toggle").click()
+        page.get_by_role("listitem").filter(has_text=re.compile(r"^Desktop$")).get_by_role("button",name="Toggle").click()
         page.locator("label").filter(has_text="Notes").locator("svg").first.click()
         page.locator("label").filter(has_text="Commands").locator("svg").first.click()
-        page.get_by_role("listitem").filter(has_text=re.compile(r"^Downloads$")).get_by_role("button",
-                                                                                             name="Toggle").click()
+        page.get_by_role("listitem").filter(has_text=re.compile(r"^Downloads$")).get_by_role("button",name="Toggle").click()
         page.locator("label").filter(has_text="Word File.doc").locator("svg").first.click()
         page.click('text=radio button')
 
@@ -123,12 +121,36 @@ def test_elements():
         page.click("#colorChange")
         page.click("#visibleAfter")
         
-        
+        # Forms 
+        page.click("text=Forms")
+        page.click("text=Practice Form")
+        page.get_by_role("textbox", name="First Name").fill("some")
+        page.get_by_role("textbox", name="Last Name").fill("name")
+        page.get_by_role("textbox", name="name@example.com").fill("some_email@gmail.com")
+        page.get_by_text("Male", exact=True).click()
+        page.get_by_text("Female", exact=True).click()
+        page.get_by_text("Other", exact=True).click()
+        page.get_by_role("textbox", name="Mobile Number").fill("123123123")
+        page.locator("#dateOfBirthInput").fill("01.04.1978")
+        page.locator("body").press("Tab")
+        page.locator("#subjectsInput").fill("some subject here")
+        page.get_by_text("Sports", exact=True).click()
+        page.get_by_text("Reading", exact=True).click()
+        page.get_by_text("Music", exact=True).click()
+        with page.expect_file_chooser() as fc_info:
+            page.click("#uploadPicture")
+        file_chooser = fc_info.value
+        file_chooser.set_files("sampleFile.jpeg")
+        page.get_by_role("textbox", name="Current Address").fill("some address")
+        page.get_by_text("Select State").click()
+        page.get_by_text("NCR", exact=True).click()
+        page.get_by_text("Select City").click()
+        page.get_by_text("Delhi", exact=True).click()
         
         browser.close()
         print('Done! ᕙ(▀̿̿Ĺ̯̿̿▀̿ ̿) ᕗ')
         
-        # to be continued ! ! !......... "forms next in queue"
+        # to be continued ! ! !......... "alerts, frame and windows next"
 
 
 
