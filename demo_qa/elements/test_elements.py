@@ -10,7 +10,7 @@ def test_elements():
         browser = p.chromium.launch(headless=False, slow_mo=500)
         page = browser.new_page()
         page.goto('https://demoqa.com/elements')
-        '''
+    
         # Text box testing
         
         page.click('span.text')
@@ -18,7 +18,6 @@ def test_elements():
         page.locator('#userEmail').fill('someemail@me.com')
         page.locator('#currentAddress').fill('Proin vitae ipsum tincidunt, lacinia nisi pellentesque,   ultricies neque.')
         page.locator('#permanentAddress').fill('Proin vitae ipsum tincidunt, lacinia nisi pellentesque, ultricies neque.')
-            
         page.click('#submit')
 
         # Checkbox
@@ -167,7 +166,7 @@ def test_elements():
             page.get_by_role("button", name="New Window Message").click()
         page3 = page3_info.value
         page3.close()
-        '''
+        
         # Alerts
         page.goto("https://demoqa.com/alerts")
         page.once("dialog", lambda dialog: dialog.dismiss())
