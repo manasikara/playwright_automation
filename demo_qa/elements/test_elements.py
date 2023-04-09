@@ -7,10 +7,10 @@ import re
 
 def test_elements():
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False, slow_mo=200)
+        browser = p.chromium.launch(headless=False, slow_mo=500)
         page = browser.new_page()
         page.goto('https://demoqa.com/elements')
-        
+        '''
         # Text box testing
         
         page.click('span.text')
@@ -36,7 +36,7 @@ def test_elements():
         
         page.click("label[for='yesRadio']")
         page.click("label[for='impressiveRadio']")
-        
+    
         # Web Tables
         
         page.click('text=Web Tables')
@@ -66,11 +66,14 @@ def test_elements():
         page.click(".-totalPages")
         page.get_by_role("spinbutton", name="jump to page").press("Tab")
         page.get_by_role("combobox", name="rows per page").press("Enter")
-        page.get_by_role("combobox", name="rows per page").select_option("5")
-
+        page.get_by_role("combobox", name="rows per page").select_option("10")
+        keyboard = page.keyboard
+        keyboard.press('Enter')
+        
+        
         # Buttons
         
-        page.click("text=Buttons")
+        page.goto("https://demoqa.com/buttons")
         page.get_by_text("Double Click Me").dblclick()
         page.get_by_text("Right Click Me").click(button="right")
         page.get_by_title("Click Me")
@@ -147,10 +150,43 @@ def test_elements():
         page.get_by_text("Select City").click()
         page.get_by_text("Delhi", exact=True).click()
         
+        # Alerts, Frame & Windows
+        # Browser WIndows
+        
+        page.click("text=Alerts, Frame & Windows")
+        page.click("text=Browser Windows")
+        with page.expect_popup() as page1_info:
+            page.get_by_role("button", name="New Tab").click()
+        page1 = page1_info.value
+        page1.close()
+        with page.expect_popup() as page2_info:
+            page.get_by_role("button", name="New Window", exact=True).click()
+        page2 = page2_info.value
+        page2.close()
+        with page.expect_popup() as page3_info:
+            page.get_by_role("button", name="New Window Message").click()
+        page3 = page3_info.value
+        page3.close()
+        '''
+        # Alerts
+        page.goto("https://demoqa.com/alerts")
+        page.once("dialog", lambda dialog: dialog.dismiss())
+        page.locator("#alertButton").click()
+        page.locator("#timerAlertButton").click()
+        page.get_by_role("link").click()
+        page.goto("https://demoqa.com/alerts")
+        page.once("dialog", lambda dialog: dialog.dismiss())
+        page.locator("#confirmButton").click()
+        click_js_button = page.locator("//button[@id='promtButton']")
+        page.on("dialog", lambda dialog: dialog.accept(prompt_text='some text'))
+        click_js_button.click()        
+        
+        
+        
         browser.close()
         print('Done! ᕙ(▀̿̿Ĺ̯̿̿▀̿ ̿) ᕗ')
         
-        # to be continued ! ! !......... "alerts, frame and windows next"
+        # to be continued ! ! !......... "frames" next
 
 
 
