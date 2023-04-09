@@ -149,8 +149,8 @@ def test_elements():
         page.get_by_text("Select City").click()
         page.get_by_text("Delhi", exact=True).click()
         
-        # Alerts, Frame & Windows
-        # Browser WIndows
+        # Alerts, Frames & Windows
+        # Browser Windows
         
         page.click("text=Alerts, Frame & Windows")
         page.click("text=Browser Windows")
