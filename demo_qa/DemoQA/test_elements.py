@@ -10,7 +10,7 @@ def test_elements():
         browser = p.chromium.launch(headless=False, slow_mo=500)
         page = browser.new_page()
         page.goto('https://demoqa.com/elements')
-    
+        
         # Text box testing
         
         page.click('span.text')
@@ -180,12 +180,26 @@ def test_elements():
         page.on("dialog", lambda dialog: dialog.accept(prompt_text='some text'))
         click_js_button.click()        
         
+        # Nested Frames
+        page.goto("https://demoqa.com/nestedframes")
+        page.frame_locator("#frame1").frame_locator("iframe").locator("html").click()
+        page.frame_locator("#frame1").get_by_text("Parent frame").click()
+        
+        # Modal Dialogs
+        page.get_by_text("Modal Dialogs").click()
+        page.get_by_role("button", name="Small modal").click()
+        page.locator("#closeSmallModal").click()
+        page.get_by_role("button", name="Large modal").click()
+        page.locator("#closeLargeModal").click()
+        
+        # WIDGETS
+        # Accordian
         
         
         browser.close()
         print('Done! ᕙ(▀̿̿Ĺ̯̿̿▀̿ ̿) ᕗ')
         
-        # to be continued ! ! !......... "frames" next
+        # to be continued ! ! !......... "WIDGETS" next
 
 
 
