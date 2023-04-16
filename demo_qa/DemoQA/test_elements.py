@@ -194,12 +194,44 @@ def test_elements():
         
         # WIDGETS
         # Accordian
+        page.goto("https://demoqa.com/accordian")
+        page.get_by_text("What is Lorem Ipsum?").click()
+        page.get_by_text("What is Lorem Ipsum?").click()
+        page.get_by_text("Where does it come from?").click()
+        page.get_by_text("Where does it come from?").click()
+        page.get_by_text("Why do we use it?").click()
+        page.get_by_text("Why do we use it?").click()
+        
+        # Auto Complete
+        page.goto("https://demoqa.com/auto-complete")
+        page.locator(".auto-complete__value-container").first.click()
+        page.locator("#autoCompleteMultipleInput").fill("whi")
+        page.locator("#autoCompleteMultipleInput").press("Tab")
+        page.locator("#autoCompleteMultipleInput").fill("re")
+        page.locator("#autoCompleteMultipleInput").press("Tab")
+        page.locator("#autoCompleteMultipleInput").fill("bl")
+        page.locator("#autoCompleteMultipleInput").press("Tab")
+        page.locator("#autoCompleteMultipleInput").press("Tab")
+        page.locator("#autoCompleteSingleInput").fill("bla")
+        page.locator("#autoCompleteSingleInput").press("Tab")
+        
+        # Data Picker   
+        page.goto("https://demoqa.com/date-picker")
+        page.locator("#datePickerMonthYearInput").click()
+        page.get_by_role("option", name="Choose Friday, May 5th, 2023").click()
+        page.locator("#dateAndTimePickerInput").click()
+        page.locator("#dateAndTimePicker span").first.click()
+        page.get_by_text("June").click()
+        page.locator("div").filter(has_text=re.compile(r"^2023$")).nth(1).click()
+        page.get_by_text("2026").click()
+        page.get_by_role("option", name="Choose Friday, June 12th, 2026").click()
+        page.get_by_text("11:45").click()
         
         
         browser.close()
         print('Done! ᕙ(▀̿̿Ĺ̯̿̿▀̿ ̿) ᕗ')
         
-        # to be continued ! ! !......... "WIDGETS" next
+        # to be continued ! ! ! ......... "SLIDER" next for testing !!!!!!!!!
 
 
 
