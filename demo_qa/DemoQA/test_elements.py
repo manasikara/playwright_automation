@@ -10,7 +10,7 @@ def test_elements():
         browser = p.chromium.launch(headless=False, slow_mo=500)
         page = browser.new_page()
         page.goto('https://demoqa.com/elements')
-        '''
+        
         # Text box testing
         
         page.click('span.text')
@@ -239,7 +239,7 @@ def test_elements():
             slider.press('ArrowLeft')
             if slider_point.inner_text() == '18':
                 break
-        '''  
+          
         # Progress Bar
         page.goto("https://demoqa.com/progress-bar")
         page.click("text=Start")
