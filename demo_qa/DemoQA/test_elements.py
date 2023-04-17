@@ -10,7 +10,7 @@ def test_elements():
         browser = p.chromium.launch(headless=False, slow_mo=500)
         page = browser.new_page()
         page.goto('https://demoqa.com/elements')
-        
+        '''
         # Text box testing
         
         page.click('span.text')
@@ -227,11 +227,34 @@ def test_elements():
         page.get_by_role("option", name="Choose Friday, June 12th, 2026").click()
         page.get_by_text("11:45").click()
         
-        
+        # Slider
+        page.goto("https://demoqa.com/slider")
+        slider = page.locator("div#sliderContainer")
+        slider_point = page.locator(".range-slider__wrap")
+        range_max = '25'
+        slider.click
+        while True:
+            if slider_point.inner_text() == range_max:
+                break
+            slider.press('ArrowLeft')
+            if slider_point.inner_text() == '18':
+                break
+        '''  
+        # Progress Bar
+        page.goto("https://demoqa.com/progress-bar")
+        page.click("text=Start")
+        time.sleep(5)
+        page.click("text=Stop")
+        time.sleep(1)
+        page.click("text=Start")
+        time.sleep(5)
+        page.click("text=Reset")
+
+           
         browser.close()
         print('Done! ᕙ(▀̿̿Ĺ̯̿̿▀̿ ̿) ᕗ')
         
-        # to be continued ! ! ! ......... "SLIDER" next for testing !!!!!!!!!
+        # to be continued ! ! ! ......... "tabs in WIDGETS" next for testing !!!
 
 
 
