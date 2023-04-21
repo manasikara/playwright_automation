@@ -124,6 +124,7 @@ def test_elements():
         page.click("#visibleAfter")
         
         # Forms 
+        
         page.click("text=Forms")
         page.click("text=Practice Form")
         page.get_by_role("textbox", name="First Name").fill("some")
@@ -168,6 +169,7 @@ def test_elements():
         page3.close()
         
         # Alerts
+        
         page.goto("https://demoqa.com/alerts")
         page.once("dialog", lambda dialog: dialog.dismiss())
         page.locator("#alertButton").click()
@@ -181,11 +183,13 @@ def test_elements():
         click_js_button.click()        
         
         # Nested Frames
+        
         page.goto("https://demoqa.com/nestedframes")
         page.frame_locator("#frame1").frame_locator("iframe").locator("html").click()
         page.frame_locator("#frame1").get_by_text("Parent frame").click()
         
         # Modal Dialogs
+        
         page.get_by_text("Modal Dialogs").click()
         page.get_by_role("button", name="Small modal").click()
         page.locator("#closeSmallModal").click()
@@ -194,6 +198,7 @@ def test_elements():
         
         # WIDGETS
         # Accordian
+        
         page.goto("https://demoqa.com/accordian")
         page.get_by_text("What is Lorem Ipsum?").click()
         page.get_by_text("What is Lorem Ipsum?").click()
@@ -203,6 +208,7 @@ def test_elements():
         page.get_by_text("Why do we use it?").click()
         
         # Auto Complete
+        
         page.goto("https://demoqa.com/auto-complete")
         page.locator(".auto-complete__value-container").first.click()
         page.locator("#autoCompleteMultipleInput").fill("whi")
@@ -216,6 +222,7 @@ def test_elements():
         page.locator("#autoCompleteSingleInput").press("Tab")
         
         # Data Picker   
+        
         page.goto("https://demoqa.com/date-picker")
         page.locator("#datePickerMonthYearInput").click()
         page.get_by_role("option", name="Choose Friday, May 5th, 2023").click()
@@ -228,6 +235,7 @@ def test_elements():
         page.get_by_text("11:45").click()
         
         # Slider
+        
         page.goto("https://demoqa.com/slider")
         slider = page.locator("div#sliderContainer")
         slider_point = page.locator(".range-slider__wrap")
@@ -241,6 +249,7 @@ def test_elements():
                 break
           
         # Progress Bar
+        
         page.goto("https://demoqa.com/progress-bar")
         page.click("text=Start")
         time.sleep(5)
@@ -251,22 +260,52 @@ def test_elements():
         page.click("text=Reset")
         
         # Tabs
+        
         page.goto("https://demoqa.com/tabs")
         page.click("#demo-tab-what")
         page.click("#demo-tab-origin")
         page.click("#demo-tab-use")
         
         # Tool Tips
+        
         page.goto("https://demoqa.com/tool-tips")
-        page.get_by_role("button").hover();
-        page.get_by_role("textbox").hover();
-        page.get_by_text("contrary").hover();
-
+        page.get_by_role("button").hover()
+        page.get_by_role("textbox").hover()
+        page.get_by_text("contrary").hover()
+        
+        # Menu
+        
+        page.goto("https://demoqa.com/menu")
+        page.get_by_role("link", name="Main Item 1").click()
+        page.get_by_role("link", name="Main Item 2").click()
+        page.get_by_role("link", name="SUB SUB LIST »").click()
+        page.get_by_role("link", name="Sub Sub Item 2").click()
+        page.get_by_role("link", name="Main Item 3").click()
+        
+        # Select Menu
+        
+        page.goto("https://demoqa.com/select-menu")
+        page.locator("#withOptGroup div").filter(has_text="Select Option").nth(1).click()
+        page.get_by_text("Group 1, option 2", exact=True).click()
+        page.locator("#selectOne div").filter(has_text="Select Title").nth(1).click()
+        page.get_by_text("Other", exact=True).click()
+        page.locator("#oldSelectMenu").select_option("4")
+        page.locator("div").filter(has_text=re.compile(r"^Select\.\.\.$")).nth(2).click()
+        page.locator("#react-select-4-option-0").click()
+        page.locator("div").filter(has_text=re.compile(r"^Green$")).nth(1).click()
+        page.locator("div").filter(has_text=re.compile(r"^Green$")).nth(1).click()
+        page.locator("#react-select-4-option-2").click()
+        page.locator("#react-select-4-option-3").click()
+        page.locator("#react-select-4-option-1").click()
+        page.locator("#cars").select_option("volvo")
+        page.locator("#cars").select_option("saab")
+        page.locator("#cars").select_option("opel")
+        page.locator("#cars").select_option("audi")
            
         browser.close()
         print('Done! ᕙ(▀̿̿Ĺ̯̿̿▀̿ ̿) ᕗ')
         
-        # to be continued ! ! ! ......... "menu in WIDGETS" next for testing !!!
+        # to be continued ! ! ! ......... "INTERACTIONS" next in queue !!!
 
 
 
