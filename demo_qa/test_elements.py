@@ -10,7 +10,7 @@ def test_elements():
         browser = p.chromium.launch(headless=False, slow_mo=500)
         page = browser.new_page()
         page.goto('https://demoqa.com/elements')
-        
+        '''
         # Text box testing
         
         page.click('span.text')
@@ -19,7 +19,7 @@ def test_elements():
         page.locator('#currentAddress').fill('Proin vitae ipsum tincidunt, lacinia nisi pellentesque,   ultricies neque.')
         page.locator('#permanentAddress').fill('Proin vitae ipsum tincidunt, lacinia nisi pellentesque, ultricies neque.')
         page.click('#submit')
-
+        
         # Checkbox
 
         page.click("text=check box")
@@ -301,11 +301,26 @@ def test_elements():
         page.locator("#cars").select_option("saab")
         page.locator("#cars").select_option("opel")
         page.locator("#cars").select_option("audi")
+        '''
+        # INTERACTIONS
+        # Sortable
+        page.goto("https://demoqa.com/sortable")
+        src = page.locator(".list-group-item list-group-item-action")
+        dest = page.locator(".list-group-item list-group-item-action")
+        src.hover()
+        page.mouse.down()
+        dest.hover()
+        page.mouse.up()
+        expect(dest).to_have_text("Five")
+        expect(src).to_have_text("One")
+
+        
+        
            
         browser.close()
         print('Done! ᕙ(▀̿̿Ĺ̯̿̿▀̿ ̿) ᕗ')
         
-        # to be continued ! ! ! ......... "INTERACTIONS" next in queue !!!
+        # to be continued ! ! ! ......... stuck at "INTERACTIONS" 
 
 
 
