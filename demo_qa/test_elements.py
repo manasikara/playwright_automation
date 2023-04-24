@@ -7,7 +7,7 @@ import re
 
 def test_elements():
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False, slow_mo=500)
+        browser = p.chromium.launch(headless=False, slow_mo=1000)
         page = browser.new_page()
         page.goto('https://demoqa.com/elements')
         '''
@@ -301,9 +301,9 @@ def test_elements():
         page.locator("#cars").select_option("saab")
         page.locator("#cars").select_option("opel")
         page.locator("#cars").select_option("audi")
-        '''
+        
         # INTERACTIONS
-        # Sortable
+        # Sortable    <----- for now, I don't know how to solve this one
         page.goto("https://demoqa.com/sortable")
         src = page.locator(".list-group-item list-group-item-action")
         dest = page.locator(".list-group-item list-group-item-action")
@@ -313,14 +313,28 @@ def test_elements():
         page.mouse.up()
         expect(dest).to_have_text("Five")
         expect(src).to_have_text("One")
-
+        '''
+        # Selectable
+        page.goto("https://demoqa.com/selectable")
+        page.click("text=Cras justo odio")
+        page.click("text=Dapibus ac facilisis in")
+        page.click("text=Morbi leo risus")
+        page.click("text=Porta ac consectetur ac")
+        page.click("#demo-tab-grid")
+        page.click("text=one")
+        page.click("text=two")
+        page.click("text=three")
+        page.click("text=four")
+        page.click("text=five")
+        page.click("text=six")
+        page.click("text=seven")
+        page.click("text=eight")
+        page.click("text=nine")
         
-        
-           
         browser.close()
         print('Done! ᕙ(▀̿̿Ĺ̯̿̿▀̿ ̿) ᕗ')
         
-        # to be continued ! ! ! ......... stuck at "INTERACTIONS" 
+        # to be continued ! ! ! .....'Reizible' next in queue -- [stuck at "INTERACTIONS"] 
 
 
 
