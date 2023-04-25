@@ -336,7 +336,7 @@ def test_elements():
         browser.close()
         print('Done! ᕙ(▀̿̿Ĺ̯̿̿▀̿ ̿) ᕗ')
         
-        # to be continued ! ! ! .....'Reizible' next in queue -- [stuck at "INTERACTIONS"] 
+        # to be continued ! ! ! .....'Resizible' next in queue -- [stuck at "INTERACTIONS"] 
 
 
 
