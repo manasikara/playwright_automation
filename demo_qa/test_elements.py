@@ -10,7 +10,7 @@ def test_elements():
         browser = p.chromium.launch(headless=False, slow_mo=1000)
         page = browser.new_page()
         page.goto('https://demoqa.com/elements')
-        '''
+        
         # Text box testing
         
         page.click('span.text')
@@ -302,8 +302,8 @@ def test_elements():
         page.locator("#cars").select_option("opel")
         page.locator("#cars").select_option("audi")
         
-        # INTERACTIONS
-        # Sortable    <----- for now, I don't know how to solve this one
+        # INTERACTIONS  <----- for now, I don't know how to solve this one
+        # Sortable    
         page.goto("https://demoqa.com/sortable")
         src = page.locator(".list-group-item list-group-item-action")
         dest = page.locator(".list-group-item list-group-item-action")
@@ -330,7 +330,7 @@ def test_elements():
         page.click("text=seven")
         page.click("text=eight")
         page.click("text=nine")
-        '''
+        
         # Resizible
         
         
