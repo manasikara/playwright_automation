@@ -10,7 +10,7 @@ def test_elements():
         browser = p.chromium.launch(headless=False, slow_mo=1000)
         page = browser.new_page()
         page.goto('https://demoqa.com/elements')
-        
+        '''
         # Text box testing
         
         page.click('span.text')
@@ -330,7 +330,8 @@ def test_elements():
         page.click("text=seven")
         page.click("text=eight")
         page.click("text=nine")
-        
+        '''
+        # Resizible
         
         
         browser.close()
