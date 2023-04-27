@@ -7,7 +7,7 @@ import re
 
 def test_elements():
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False, slow_mo=1000)
+        browser = p.chromium.launch(headless=False, slow_mo=700)
         page = browser.new_page()
         page.goto('https://demoqa.com/elements')
         
@@ -302,19 +302,19 @@ def test_elements():
         page.locator("#cars").select_option("opel")
         page.locator("#cars").select_option("audi")
         
-        # INTERACTIONS  <----- for now, I don't know how to solve this one
+        # INTERACTIONS  
         # Sortable    
         page.goto("https://demoqa.com/sortable")
-        src = page.locator(".list-group-item list-group-item-action")
-        dest = page.locator(".list-group-item list-group-item-action")
-        src.hover()
-        page.mouse.down()
-        dest.hover()
-        page.mouse.up()
-        expect(dest).to_have_text("Five")
-        expect(src).to_have_text("One")
         
-        # Selectable
+        page.get_by_role("tabpanel", name="List").get_by_text("One").drag_to(page.get_by_role("tabpanel", name="List").get_by_text("Six"))
+        page.get_by_role("tabpanel",name="List").get_by_text('three').drag_to(page.get_by_role("tabpanel", name="List").get_by_text('Two'))
+        
+        page.get_by_role("tab", name="Grid").click()
+        
+        page.get_by_role("tabpanel", name="Grid").get_by_text("One").drag_to(page.get_by_role("tabpanel", name="Grid").get_by_text("Nine"))
+        page.get_by_role("tabpanel", name="Grid").get_by_text("Seven").drag_to(page.get_by_role("tabpanel", name="Grid").get_by_text("Three"))
+        
+        # Selectable  
         page.goto("https://demoqa.com/selectable")
         page.click("text=Cras justo odio")
         page.click("text=Dapibus ac facilisis in")
@@ -330,14 +330,16 @@ def test_elements():
         page.click("text=seven")
         page.click("text=eight")
         page.click("text=nine")
-        
+    
         # Resizible
+        page.goto('https://demoqa.com/resizable')
+
         
         
         browser.close()
         print('Done! ᕙ(▀̿̿Ĺ̯̿̿▀̿ ̿) ᕗ')
         
-        # to be continued ! ! ! .....'Resizible' next in queue -- [stuck at "INTERACTIONS"] 
+        # to be continued ! ! ! .....'Resizible' next in queue
 
 
 
