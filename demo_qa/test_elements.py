@@ -330,11 +330,15 @@ def test_elements():
         page.click("text=seven")
         page.click("text=eight")
         page.click("text=nine")
-    
-        # Resizible
-        page.goto('https://demoqa.com/resizable')
-
         
+        # Resizible  <-- can't get this one to work......
+        page.goto('https://demoqa.com/resizable')
+        page_object_handle = page.query_selector('#resizableBoxWithRestriction span')
+        bounding_box = page_object_handle.bounding_box()
+        page.mouse.move(bounding_box['x'] + bounding_box['width'], bounding_box['y'] + bounding_box['height'])
+        page.mouse.down()
+        page.mouse.move(bounding_box['x'] + 400, bounding_box['y'] + 400)
+        page.mouse.up()
         
         browser.close()
         print('Done! ᕙ(▀̿̿Ĺ̯̿̿▀̿ ̿) ᕗ')
