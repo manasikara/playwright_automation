@@ -1,5 +1,5 @@
 from playwright.sync_api import Playwright, sync_playwright, expect
-
+import time
 
 def run(playwright: Playwright) -> None:
     browser = playwright.chromium.launch(headless=False, slow_mo=600)
@@ -20,6 +20,11 @@ def run(playwright: Playwright) -> None:
     page3.close()
     page.get_by_text("Find me I have nothing in me!!").click()
     page.get_by_text("I will have random ID").click()
+
+    page.click("text=Alert Box")
+    page.get_by_role("button", name="Alert Box").click()
+
+
 
     print('Done!')
     # ---------------------
