@@ -1,6 +1,7 @@
 from playwright.sync_api import Playwright, sync_playwright, expect
 
-def test_login():
+
+def test_fast_transfer():
     def run(playwright: Playwright) -> None:
         browser = playwright.chromium.launch(headless=False, slow_mo=500)
         context = browser.new_context()
@@ -14,21 +15,24 @@ def test_login():
         page.locator("#login_password").fill("12345678")
         page.locator("#login_password").press("Enter")
 
+        # Fast transfer
+        page.get_by_role("link", name="szybki przelew").click()
+        page.locator("#widget_1_transfer_receiver").select_option("2")
+        page.locator("#widget_1_transfer_amount").click()
+        page.locator("#widget_1_transfer_amount").fill("20,00")
+        page.locator("#widget_1_transfer_title").click()
+        page.locator("#widget_1_transfer_title").fill("demo transfer")
+        page.get_by_role("button", name="wykonaj").click()
+        page.get_by_role("link", name="mój pulpit").click()
+
+
 
         # ---------------------
 
         context.close()
         browser.close()
 
-
     with sync_playwright() as playwright:
         run(playwright)
 
     print('Done!')
-    
-    
-    
-    
-    
-    
-    
