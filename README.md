@@ -1,5 +1,5 @@
 # playwright_automation
-Learning automation in Playwright --> http://uitestingplayground.com/
+Learning automation with Playwright --> http://uitestingplayground.com/
 ----------
 Testing shopping process at --> https://www.saucedemo.com/
 ---------------
