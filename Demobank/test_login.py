@@ -13,7 +13,7 @@ def test_login():
         page.locator("#login_password").click()
         page.locator("#login_password").fill("12345678")
         page.locator("#login_password").press("Enter")
-
+        
 
         # ---------------------
 
