@@ -13,4 +13,6 @@ Testing --> http://www.seleniumframework.com/Practiceform/
 ----------------------------
 Testing --> https://demobank.jaktestowac.pl
 ---------------
+Testing --> https://antycaptcha.amberteam.pl
+--------------------------------------
 
