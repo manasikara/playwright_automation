@@ -341,7 +341,7 @@ def test_elements():
         page.mouse.up()
         
         browser.close()
-        print('Done! ᕙ(▀̿̿Ĺ̯̿̿▀̿ ̿) ᕗ')
+        print('Done! ᕙ(▀̿̿Ĺ̯̿̿▀̿ ̿) ᕗ'')
         
         # to be continued ! ! ! .....'Resizible' next in queue
 
