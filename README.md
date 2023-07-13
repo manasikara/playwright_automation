@@ -13,4 +13,4 @@ Testing --> http://www.seleniumframework.com/Practiceform/
 ----------------------------
 Testing --> https://demobank.jaktestowac.pl
 ---------------
-DEMOBLAZE: Learning a POM within Playwright with Python. 
+
