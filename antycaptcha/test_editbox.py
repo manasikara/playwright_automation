@@ -2,7 +2,7 @@
 
 from playwright.sync_api import Playwright, sync_playwright, expect
 
-def test_three_buttons():
+def test_editbox():
     def run(playwright: Playwright) -> None:
         browser = playwright.chromium.launch(headless=False, slow_mo=800)
         context = browser.new_context()
