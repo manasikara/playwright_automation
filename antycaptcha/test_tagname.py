@@ -1,15 +1,17 @@
 # testing resources --> https://antycaptcha.amberteam.pl
 
 from playwright.sync_api import Playwright, sync_playwright, expect
+import time
 
-def test_class():
+def test_tagname():
     def run(playwright: Playwright) -> None:
-        browser = playwright.chromium.launch(headless=False, slow_mo=800)
+        browser = playwright.chromium.launch(headless=False, slow_mo=1200)
         context = browser.new_context()
         page = context.new_page()
-        page.goto('https://antycaptcha.amberteam.pl/stf/3-5-2?seed=62415d0f-2f94-46be-bab7-2f1be7c6947b')
-        page.click('button.button.u-full-width.off')
-        page.get_by_role("button", name="Check solution").click()
+        page.goto('https://antycaptcha.amberteam.pl/stf/3-5-3?seed=e1ec7e75-8cbc-4a99-ad0c-2363640f8be9')
+        element = page.locator("div:has(h5)").nth(1)
+        print(element.get_attribute("href"))
+        
         
 
     # ---------------------
