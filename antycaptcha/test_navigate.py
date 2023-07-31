@@ -3,7 +3,7 @@
 from playwright.sync_api import Playwright, sync_playwright, expect
 import time
 
-def test_ID():
+def test_navigate():
     def run(playwright: Playwright) -> None:
         browser = playwright.chromium.launch(headless=False, slow_mo=700)
         context = browser.new_context()
