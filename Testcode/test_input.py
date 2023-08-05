@@ -4,7 +4,7 @@ from playwright.sync_api import Playwright, sync_playwright, expect
 
 def test_input():
     def run(playwright: Playwright) -> None:
-        browser = playwright.chromium.launch(headless=False, slow_mo=700)
+        browser = playwright.chromium.launch(headless=False, slow_mo=400)
         context = browser.new_context()
         page = context.new_page()
         page.goto("https://letcode.in/edit")
@@ -13,6 +13,11 @@ def test_input():
         page.locator("#join").click()
         page.locator("#join").fill("something")
         page.locator("#join").press("Tab")
+        myValue = page.locator('#getMe').get_attribute('value')
+        # stuck at this shit*y task ! ! ! !!! ! ! ! !! 
+        
+       
+        
 
         # ---------------------
         context.close()
